@@ -134,6 +134,95 @@ document.addEventListener("click", function (e) {
 });
 
 
+// Select All Bullets
+const allBullets = document.querySelectorAll(".nav-bullets .bullet");
+
+// Select All Links
+const allLinks = document.querySelectorAll(".links a");
+
+function scrollToSomewhere(elements) {
+
+  elements.forEach(ele => {
+
+    ele.addEventListener("click", (e) => {
+  
+      e.preventDefault();
+  
+      document.querySelector(e.target.dataset.section).scrollIntoView({
+  
+        behavior: 'smooth'
+  
+      });
+  
+    });
+  
+  });
+
+}
+
+scrollToSomewhere(allBullets);
+scrollToSomewhere(allLinks);
+
+// Handle Active State
+function handleActive(ev) {
+
+  // Remove Active Class From All Childrens
+  ev.target.parentElement.querySelectorAll(".active").forEach(element => {
+
+    element.classList.remove("active");
+
+  });
+  
+  // Add Active Class On Self
+  ev.target.classList.add("active");
+
+}
+
+// Toggle Menu 
+let toggleBtn = document.querySelector(".toggle-menu");
+let tLinks = document.querySelector(".links");
+
+toggleBtn.onclick = function (e) {
+
+  // Stop Propagation
+  e.stopPropagation();
+
+  // Toggle Class "menu-active" On Button
+  this.classList.toggle("menu-active");
+
+  // Toggle Class "open" On Links
+  tLinks.classList.toggle("open");
+
+};
+
+// Click Anywhere Outside Menu And Toggle Button
+document.addEventListener("click", (e) => {
+
+  if (e.target !== toggleBtn && e.target !== tLinks) {
+
+    // Check If Menu Is Open
+    if (tLinks.classList.contains("open")) {
+
+      // Toggle Class "menu-active" On Button
+      toggleBtn.classList.toggle("menu-active");
+
+      // Toggle Class "open" On Links
+      tLinks.classList.toggle("open");
+
+    }
+
+  }
+
+});
+
+// Stop Propagation On Menu 
+tLinks.onclick = function (e) {
+  e.stopPropagation();
+}
+
+
+
+
 
 
 
